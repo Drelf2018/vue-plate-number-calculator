@@ -7,6 +7,9 @@
             塔板数计算器
           </template>
           <template #extra>
+            <div class="el-page-header__icon" @click="get_image">
+              <el-icon><Switch /></el-icon>
+            </div>
           </template>
         </el-page-header>
       </el-header>
@@ -50,7 +53,9 @@
         <div style="text-align: center;line-height: 1.5em;padding: 1em 0;">
           如有使用中的疑问、建议或问题反馈欢迎在
           <a href="https://github.com/Drelf2018/vue-plate-number-calculator">项目</a>
-          留言。
+          留言，或者发
+          <a href="mailto:drelf2018@outlook.com">邮件</a>
+          给我。
         </div>
       </el-footer>
     </el-container>
@@ -76,7 +81,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Solution from './solution'
-import { EditPen } from '@element-plus/icons-vue'
+import { EditPen, Switch } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 
 const s = ref(new Solution(140, 0.65, 0.99, 0.01, 1.4399, 1.5, 1))
@@ -124,9 +129,21 @@ function modify_parameter() {
 } 
 
 const image = ref("/elaina" + Math.floor(Math.random() * 3) + ".webp")
+
+function get_image() {
+  let url = "/elaina" + Math.floor(Math.random() * 3) + ".webp"
+  while (url == image.value) {
+    url = "/elaina" + Math.floor(Math.random() * 3) + ".webp"
+  }
+  image.value = url
+}
 </script>
 
 <style>
+.el-main {
+  min-height: calc(100vh - 111.6px);
+}
+
 .el-drawer__header {
   margin-bottom: 0px !important;
   line-height: 52px;
